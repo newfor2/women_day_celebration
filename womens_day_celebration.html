@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 20/10 - Vietnamese Women's Day</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;700&family=Great+Vibes&display=swap');
+
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-light: #0f3460;
+            --primary-pink: #ff6b9d;
+            --accent-yellow: #ffd700;
+            --text-light: #ffffff;
+            --envelope-body: #f7f3e9;
+            --envelope-flap: #e0d9cc;
+            --letter-paper: #fffaf0;
+            --button-hover: #ff4d88;
+            --shadow-light: rgba(0,0,0,0.2);
+            --shadow-medium: rgba(0,0,0,0.3);
+            --shadow-heavy: rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .step {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .step.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .step:not(.active) {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+
+        /* Step 1: Mailbox */
+        .mailbox-container {
+            text-align: center;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .mailbox-wrapper {
+            position: relative;
+            width: 200px;
+            height: 250px;
+        }
+
+        .mailbox-body {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 150px;
+            background: linear-gradient(to bottom, #e63946 0%, #d62839 100%);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .mailbox-door {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 80px;
+            background: #c1121f;
+            border-radius: 5px;
+            transition: transform 0.6s ease;
+            transform-origin: bottom;
+            border: 3px solid #780000;
+        }
+
+        .mailbox-container.open .mailbox-door {
+            transform: translateX(-50%) rotateX(-90deg);
+        }
+
+        .mailbox-flag {
+            position: absolute;
+            top: 40px;
+            right: -20px;
+            width: 60px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .mailbox-flag::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid #ffd700;
+            border-bottom: 12px solid transparent;
+            border-top: 12px solid transparent;
+        }
+
+        .mailbox-container:hover .mailbox-flag {
+            transform: rotate(-45deg);
+        }
+
+        .mailbox-top {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 100px;
+            background: linear-gradient(to bottom, #e63946 0%, #d62839 100%);
+            border-radius: 90px 90px 0 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .mailbox-slot {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: #780000;
+            border-radius: 2px;
+        }
+
+        .mailbox-instruction {
+            margin-top: 280px;
+            font-size: 1.3rem;
+            color: var(--accent-yellow);
+            animation: bounce 1.5s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Step 2: Envelope */
+        .envelope-container {
+            text-align: center;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 200px;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--envelope-body);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px var(--shadow-medium);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-color: var(--envelope-flap);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 0.5s ease-in-out;
+            z-index: 2;
+        }
+
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--envelope-body);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 100%, 100% 100%, 100% 50%, 50% 100%, 0 50%);
+            z-index: 1;
+        }
+
+        .envelope-seal {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmNmI5ZCI+PHBhdGggZD0iTTEyIDYuMjc1Yy01LjUwMy01LjgyOC0xNC40NDUgMi41NDctNi40NDUgOS42NDcgNC44MjcgNC44MjcgOS4xMjcgMi40NTcgMTIgMi41MjEgMi44NzMtLjA2NCA3LjE3MyAyLjMwMyAxMi0yLjUyMSAxMi03LjA4IDcuNjA4LTExLjQ4NSAyLjc1NS0xMS43OTJjLTcuOTk5LTcuMzk5LTMuMzk1LTkuNzE0LTYuNDQ1LTkuNjQ3eiIvPjwvc3ZnPg==');
+            background-size: cover;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .envelope-container.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .click-instruction {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: var(--accent-yellow);
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Step 3: Letter */
+        .letter-container {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s 0.5s ease, transform 0.5s 0.5s ease;
+            max-width: 90vw;
+        }
+
+        .letter-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter {
+            width: 500px;
+            max-width: 100%;
+            background-color: var(--letter-paper);
+            color: var(--bg-dark);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px var(--shadow-medium);
+            line-height: 1.8;
+        }
+
+        .letter h2 {
+            color: var(--primary-pink);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .letter p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .action-button {
+            padding: 12px 25px;
+            background-color: var(--primary-pink);
+            color: var(--text-light);
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px var(--shadow-medium);
+            letter-spacing: 0.5px;
+            margin-top: 20px;
+        }
+
+        .action-button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow-heavy);
+        }
+
+        /* Step 4: Celebration with Clapping Hands */
+        .celebration-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .celebration-card {
+            text-align: center;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px var(--shadow-heavy);
+            max-width: 700px;
+            z-index: 10;
+            animation: popIn 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .clapping-hands {
+            font-size: 8rem;
+            animation: clap 0.8s ease-in-out infinite;
+            margin: 30px 0;
+        }
+
+        @keyframes clap {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .celebration-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .celebration-message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .music-button {
+        }
+
+        .music-button:hover {
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 8;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-pink);
+            opacity: 0;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Hearts Animation */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: floatHeart 4s ease-in forwards;
+        }
+
+        @keyframes floatHeart {
+            0% { 
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% { 
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .letter {
+                width: 90%;
+                padding: 30px;
+            }
+            .letter h2 {
+                font-size: 2rem;
+            }
+            .letter p {
+                font-size: 1rem;
+            }
+            .celebration-title {
+                font-size: 2.5rem;
+            }
+            .clapping-hands {
+                font-size: 6rem;
+            }
+            .celebration-message {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mailbox-wrapper {
+                transform: scale(0.8);
+            }
+            .envelope {
+                transform: scale(0.8);
+            }
+            .celebration-title {
+                font-size: 2rem;
+            }
+            .clapping-hands {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Step 1: Mailbox -->
+    <div class="step active" id="step1">
+        <div class="mailbox-container" id="mailboxContainer">
+            <div class="mailbox-wrapper">
+                <div class="mailbox-top">
+                    <div class="mailbox-slot"></div>
+                </div>
+                <div class="mailbox-body">
+                    <div class="mailbox-door"></div>
+                </div>
+                <div class="mailbox-flag"></div>
+            </div>
+            <p class="mailbox-instruction">Nhấn vào hộp thư! 💌</p>
+        </div>
+    </div>
+
+    <!-- Step 2: Envelope -->
+    <div class="step" id="step2">
+        <div class="envelope-container" id="envelopeContainer">
+            <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-front"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-seal"></div>
+            </div>
+            <p class="click-instruction">Mở phong bì! ✉️</p>
+        </div>
+    </div>
+
+    <!-- Step 3: Letter -->
+    <div class="step" id="step3">
+        <div class="letter-container" id="letterContainer">
+            <div class="letter">
+                <h2>Chúc Mừng 20/10</h2>
+                <p>Gửi những người phụ nữ tuyệt vời,</p>
+                <p>Nhân ngày Phụ nữ Việt Nam 20/10, xin gửi đến bạn những lời chúc tốt đẹp nhất.</p>
+                <p>Chúc bạn luôn tươi trẻ, xinh đẹp, hạnh phúc và thành công trong mọi lĩnh vực của cuộc sống. Hãy luôn tỏa sáng và lan tỏa năng lượng tích cực đến mọi người xung quanh.</p>
+                <p>Chúc mừng ngày của bạn! 🌸💕</p>
+                <button id="revealButton" class="action-button">Xem Món Qùa Đặc Biệt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 4: Celebration -->
+    <div class="step" id="step4">
+        <div class="celebration-container">
+            <div class="confetti-container"></div>
+            <div class="hearts-container"></div>
+            
+            <div class="celebration-card">
+                <div class="clapping-hands">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="text-decoration: none; color: inherit;">
+                        👏
+                    </a>
+                </div>
+                <h1 class="celebration-title">Chúc Mừng 20/10!</h1>
+                <p class="celebration-message">
+                    Tặng các bạn một tràng vỗ tay!!!🌹 <br>
+                    (nhấn vào cái tay nhé 🤫) <br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mailboxContainer = document.getElementById('mailboxContainer');
+            const envelopeContainer = document.getElementById('envelopeContainer');
+            const revealButton = document.getElementById('revealButton');
+            
+            const steps = {
+                step1: document.getElementById('step1'),
+                step2: document.getElementById('step2'),
+                step3: document.getElementById('step3'),
+                step4: document.getElementById('step4'),
+            };
+
+            function transitionToStep(targetStepId) {
+                const currentActive = document.querySelector('.step.active');
+                if (currentActive) {
+                    currentActive.classList.remove('active');
+                }
+                steps[targetStepId].classList.add('active');
+            }
+
+            // Step 1: Mailbox opens
+            mailboxContainer.addEventListener('click', () => {
+                mailboxContainer.classList.add('open');
+                mailboxContainer.querySelector('.mailbox-instruction').style.opacity = '0';
+                setTimeout(() => {
+                    transitionToStep('step2');
+                }, 800);
+            });
+
+            // Step 2: Envelope opens
+            envelopeContainer.addEventListener('click', () => {
+                envelopeContainer.classList.add('open');
+                envelopeContainer.querySelector('.click-instruction').style.opacity = '0';
+                setTimeout(() => {
+                    transitionToStep('step3');
+                    setTimeout(() => {
+                        document.getElementById('letterContainer').classList.add('show');
+                    }, 100);
+                }, 700);
+            });
+
+            // Step 3: Reveal celebration
+            revealButton.addEventListener('click', () => {
+                transitionToStep('step4');
+                startCelebration();
+            });
+
+            function startCelebration() {
+                createConfetti(150);
+                createHearts(20);
+                
+                // Additional confetti bursts
+                setTimeout(() => createConfetti(100), 500);
+                setTimeout(() => createConfetti(80), 1000);
+                setTimeout(() => createHearts(15), 800);
+            }
+
+            function createConfetti(count) {
+                const container = document.querySelector('.confetti-container');
+                const colors = ['#ff6b9d', '#ffd700', '#ffffff', '#ff1493', '#ff69b4'];
+
+                for (let i = 0; i < count; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.top = `${Math.random() * 20 - 10}vh`;
+                    confetti.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                    confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+                    
+                    const size = Math.random() * 10 + 5;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    if (Math.random() > 0.5) confetti.style.borderRadius = '50%';
+
+                    container.appendChild(confetti);
+                    confetti.addEventListener('animationend', () => confetti.remove());
+                }
+            }
+
+            function createHearts(count) {
+                const container = document.querySelector('.hearts-container');
+                const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '🌸', '🌺'];
+
+                for (let i = 0; i < count; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.left = `${Math.random() * 90 + 5}vw`;
+                    heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                    heart.style.animationDelay = `${Math.random() * 2}s`;
+
+                    container.appendChild(heart);
+                    heart.addEventListener('animationend', () => heart.remove());
+                }
+            }
+        });
+    </script>
+</body>
+</html>
